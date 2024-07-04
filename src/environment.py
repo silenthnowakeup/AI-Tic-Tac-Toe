@@ -159,7 +159,7 @@ class TicTacToe:
 
         if isinstance(playerO, Agent):
             self.ai = playerO
-            self.ai.loadQtable("./states/player2states")
+            self.ai.loadQtable("../states/player2states")
             self.ai.epsilon = 0
             self.isAI = True
         elif isinstance(playerO, Randomplayer):
@@ -322,8 +322,8 @@ class TicTacToe:
         """
         Сохранение Q-таблиц.
         """
-        self.player1.saveQtable("./states/player1states")
-        self.player2.saveQtable("./states/player2states")
+        self.player1.saveQtable("../states/player1states")
+        self.player2.saveQtable("../states/player2states")
 
     # Take next step and return reward
     def step(self, isX, move):
