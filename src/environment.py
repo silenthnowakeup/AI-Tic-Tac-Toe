@@ -265,7 +265,7 @@ class TicTacToe:
         reward, done = self.evaluate('X' if isX else 'O')
         return reward, done
 
-    def train(self, player1, player2, iterations):
+    def train(self, player1, player2, iterations, epsilon_decay=0.9999):
         """
         Функция обучения агента.
         Args:
@@ -278,7 +278,7 @@ class TicTacToe:
             self.player2 = player2
         if self.training:
             for i in range(iterations):
-                print("training", i)
+                print(f"training", i)
                 self.player1.game_begin()
                 self.player2.game_begin()
                 self.reset()
@@ -315,8 +315,9 @@ class TicTacToe:
                             self.player2.updateQ(reward, self.board, self.possible_moves())
                         else:
                             self.player1.updateQ(reward, self.board, self.possible_moves())
-
                     isX = not isX
+                player1.epsilon *= epsilon_decay
+                player2.epsilon *= epsilon_decay
 
     def saveStates(self):
         """

@@ -5,7 +5,7 @@ import pickle
 
 
 class Agent:
-    def __init__(self, epsilon=0.2, alpha=0.3, gamma=0.9):
+    def __init__(self, epsilon=0.1, alpha=0.1, gamma=0.9):
         """
         Инициализация агента с параметрами epsilon, alpha, gamma для Q-обучения.
 
@@ -28,6 +28,9 @@ class Agent:
         self.last_board = None
         self.q_last = 0.0
         self.state_action_last = None
+        self.role = role
+    def switch_role(self):
+        self.role = 'O' if self.role == 'X' else 'X'
 
     def game_begin(self):
         """

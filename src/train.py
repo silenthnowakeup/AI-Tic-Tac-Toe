@@ -6,7 +6,7 @@ def main():
     game = TicTacToe(True)  # game instance, True means training
     player1 = Agent()  # player1 learning agent
     player2 = Agent()  # player2 learning agent
-    game.train(player1, player2, 200000)
+    game.train(player1, player2, 300000)
     game.saveStates()  # save Qtable
 
 
