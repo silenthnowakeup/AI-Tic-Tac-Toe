@@ -53,14 +53,16 @@ python3 src/train.py
 ## Структура проекта
 
 ```
-├── agent.py
 ├── Dockerfile
-├── environment.py
-├── play.py
 ├── README.md
 ├── requirements.txt
-├── states
-│   ├── player1states
-│   └── player2states
-└── train.py
+├── src
+│   ├── agent.py
+│   ├── environment.py
+│   ├── play.py
+│   └── train.py
+└── states
+    ├── player1states
+    └── player2states
+
 ```
