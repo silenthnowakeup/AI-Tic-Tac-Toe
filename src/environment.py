@@ -2,7 +2,7 @@ import pygame
 import random
 import time
 from agent import Agent
-
+import matplotlib.pyplot as plt
 
 # Human player
 class Human:
@@ -193,7 +193,7 @@ class TicTacToe:
                                 self.reset()
             else:
                 if self.isAI:
-                    move = self.ai.epslion_greedy(self.board, self.possible_moves())
+                    move = self.ai.epsilon_greedy(self.board, self.possible_moves())
                 else:
                     move = self.ai.move(self.possible_moves())
                 if move is not None:
@@ -265,7 +265,7 @@ class TicTacToe:
         reward, done = self.evaluate('X' if isX else 'O')
         return reward, done
 
-    def train(self, player1, player2, iterations, epsilon_decay=0.9999):
+    def train(self, player1, player2, iterations, epsilon_decay=0.9):
         """
         Функция обучения агента.
         Args:
@@ -286,9 +286,9 @@ class TicTacToe:
                 isX = random.choice([True, False])
                 while not done:
                     if isX:
-                        move = self.player1.epslion_greedy(self.board, self.possible_moves())
+                        move = self.player1.epsilon_greedy(self.board, self.possible_moves())
                     else:
-                        move = self.player2.epslion_greedy(self.board, self.possible_moves())
+                        move = self.player2.epsilon_greedy(self.board, self.possible_moves())
 
                     reward, done = self.step(isX, move)
 
@@ -318,6 +318,7 @@ class TicTacToe:
                     isX = not isX
                 player1.epsilon *= epsilon_decay
                 player2.epsilon *= epsilon_decay
+
 
     def saveStates(self):
         """

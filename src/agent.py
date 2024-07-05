@@ -5,7 +5,7 @@ import pickle
 
 
 class Agent:
-    def __init__(self, epsilon=0.1, alpha=0.1, gamma=0.9):
+    def __init__(self, epsilon=0.1, alpha=0.5, gamma=0.9):
         """
         Инициализация агента с параметрами epsilon, alpha, gamma для Q-обучения.
 
@@ -28,9 +28,8 @@ class Agent:
         self.last_board = None
         self.q_last = 0.0
         self.state_action_last = None
-        self.role = role
-    def switch_role(self):
-        self.role = 'O' if self.role == 'X' else 'X'
+        self.rewards = 0.0
+
 
     def game_begin(self):
         """
@@ -40,7 +39,7 @@ class Agent:
         self.q_last = 0.0
         self.state_action_last = None
 
-    def epslion_greedy(self, state, possible_moves):
+    def epsilon_greedy(self, state, possible_moves):
         """
         Выбор действия по стратегии ε-greedy.
 
@@ -100,6 +99,7 @@ class Agent:
         - possible_moves (list): Список возможных действий (ходов).
 
         """
+        self.rewards += reward
         q_list = [self.getQ(tuple(state), move) for move in possible_moves]
         max_q_next = max(q_list) if q_list else 0.0
 
@@ -126,3 +126,6 @@ class Agent:
         """
         with open(file_name, 'rb') as handle:
             self.Q = pickle.load(handle)
+
+    def getRewards(self):
+        return self.rewards
